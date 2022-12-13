@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+    <h1>Hello World!</h1>
+
+    <form>
+        {{ form.hidden_tag() }}
+
+        {% for field in form if field.type != 'CSRFTokenField' %}
+            <div>
+                {% if field.type == 'BooleanField' %}
+                    {# A more complicated checkbox initialization: #}
+                    {# Check all boxes if language is PHP #}
+                    {{ field(checked=(field.data or form.language.data == 'PHP')) }}
+                    {{ field.label }} 
+                {% else %}
+                    {{ field.label }}
+                    {{ field }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </form>
+{% endblock %}
