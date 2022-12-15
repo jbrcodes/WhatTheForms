@@ -4,15 +4,13 @@
 {% block content %}
     <h1>Hello World!</h1>
 
-    <form>
+    <form method="POST" action="/submit">
         {{ form.hidden_tag() }}
 
         {% for field in form if field.type != 'CSRFTokenField' %}
             <div>
                 {% if field.type == 'BooleanField' %}
-                    {# A more complicated checkbox initialization: #}
-                    {# Check all boxes if language is PHP #}
-                    {{ field(checked=(field.data or form.language.data == 'PHP')) }}
+                    {{ field }}
                     {{ field.label }} 
                 {% else %}
                     {{ field.label }}
@@ -20,5 +18,7 @@
                 {% endif %}
             </div>
         {% endfor %}
+
+        <button type="submit">Submit</button>
     </form>
 {% endblock %}
